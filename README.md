@@ -22,36 +22,37 @@ ClickUp-Java is a library to interact with the [ClickUp](https://clickup.com/) A
 ## Usage
 ### API Calls
 A list of available API calls of the ClickUp API. For more information [click here](https://clickup.com/api).
+
 | API Call | Method | Return/.obj() Type |
-|----------|--------|--------------|
-|Get Access Token|getAccessToken(String clientId, String clientSecret, String code)|Boolean|
-|Get Authorized User|getAuthorizedUser()|CUUser|
-|Get Authorized Teams|getAuthorizedTeams()|ArrayList\<CUTeams\>|
-|Get Teams|getTeams()|ArrayList\<CUTeams\>|
-|Create Space|createSpace(Long teamID, CUSpace space)|CUSpace|
-|Update Space|updateSpace(Long spaceID, CUSpace space)|CUSpace|
-|Delete Space|deleteSpace(Long spaceID)|Boolean|
-|Get Spaces|getSpaces(Long teamID, Boolean archived)|ArrayList\<CUSpace\>|
-|Get Space|getSpace(Long spaceID)|CUSpace|
-|Create Folder|createFolder(Long spaceID, CUFolder folder)|CUFolder|
-|Update Folder|updateFolder(Long folderID, CUFolder folder)|CUFolder|
-|Delete Folder|deleteFolder(Long folderID)|Boolean|
-|Get Folders|getFolders(Long spaceID, Boolean archived)|ArrayList\<CUFolder\>|
-|Get Folder|getFolder(Long folderID)|CUFolder|
-|Create List|createList(Long folderID, CUList list)|CUList|
-|Create Folderless List|createFolderlessList(Long spaceID, CUList list)|CUList|
-|Update List|updateList(String listID, CUList list)|CUList|
-|Delete List|deleteList(Long listID)|Boolean|
-|Get Lists|getLists(Long folderID, Boolean archived)|ArrayList\<CUList\>|
-|Get Folderless Lists|getFolderlessLists(Long spaceID, Boolean archived)|ArrayList\<CUList\>|
-|Get List|getList(Long listID)|CUList|
-|Create Task|createTask(Long listID, CUTask task)|CUTask|
-|Update Task|updateTask(String taskID, CUTask task)|CUTask|
-|Delete Task|deleteTask(String taskID)|Boolean|
-|Get Tasks|getTasks(Long listID, Boolean archived)|ArrayList\<CUTask\>|
-|Get Task|getTask(String taskID)|CUTask|
-|Get List Members|getListMembers(Long listID)|ArrayList\<CUMember\>|
-|Get Task Members|getTaskMembers(String taskID)|ArrayList\<CUMember\>|
+|----------|--------|--------------------|
+| Get Access Token | getAccessToken(String clientId, String clientSecret, String code) | Boolean |
+| Get Authorized User | getAuthorizedUser() | CUUser |
+| Get Authorized Teams | getAuthorizedTeams() | ArrayList\<CUTeams\> |
+| Get Teams | getTeams() | ArrayList\<CUTeams\> |
+| Create Space | createSpace(Long teamID, CUSpace space) | CUSpace |
+| Update Space | updateSpace(Long spaceID, CUSpace space) | CUSpace |
+| Delete Space | deleteSpace(Long spaceID) | Boolean |
+| Get Spaces | getSpaces(Long teamID, Boolean archived) | ArrayList\<CUSpace\> |
+| Get Space | getSpace(Long spaceID) | CUSpace |
+| Create Folder | createFolder(Long spaceID, CUFolder folder) | CUFolder |
+| Update Folder | updateFolder(Long folderID, CUFolder folder) | CUFolder |
+| Delete Folder | deleteFolder(Long folderID) | Boolean |
+| Get Folders | getFolders(Long spaceID, Boolean archived) | ArrayList\<CUFolder\> |
+| Get Folder | getFolder(Long folderID) | CUFolder |
+| Create List | createList(Long folderID, CUList list) | CUList |
+| Create Folderless List | createFolderlessList(Long spaceID, CUList list) | CUList |
+| Update List | updateList(String listID, CUList list) | CUList |
+| Delete List | deleteList(Long listID) | Boolean |
+| Get Lists | getLists(Long folderID, Boolean archived) | ArrayList\<CUList\> |
+| Get Folderless Lists | getFolderlessLists(Long spaceID, Boolean archived) | ArrayList\<CUList\> |
+| Get List | getList(Long listID) | CUList |
+| Create Task | createTask(Long listID, CUTask task) | CUTask |
+| Update Task | updateTask(String taskID, CUTask task) | CUTask |
+| Delete Task | deleteTask(String taskID) | Boolean |
+| Get Tasks | getTasks(Long listID, Boolean archived) | ArrayList\<CUTask\> |
+| Get Task | getTask(String taskID) | CUTask |
+| Get List Members | getListMembers(Long listID) | ArrayList\<CUMember\> |
+| Get Task Members | getTaskMembers(String taskID) | ArrayList\<CUMember\> |
 
 ### Examples
 
