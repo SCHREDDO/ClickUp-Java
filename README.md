@@ -1,23 +1,28 @@
 # ClickUp-Java
-![build version](https://img.shields.io/badge/version-0.1.0--alpha-brightgreen.svg)
-![release version](https://img.shields.io/badge/release-v0.1.0--alpha-blue.svg)
+![build version](https://img.shields.io/badge/version-0.2.0--alpha-brightgreen.svg)
 ![framework or language](https://img.shields.io/badge/Java-1.5-blue.svg)
 ![license](https://img.shields.io/badge/license-AGPL--3.0-lightgrey.svg)
 
-### Current Version 0.1.0-alpha
-### Development Version 0.1.0-alpha
-
 ## About
-ClickUp-Java is a library to interact with the [ClickUp](https://clickup.com/) API (ClickUp 2.0). The library is programed in Java.
+ClickUp-Java is a (unofficial) library to interact with the [ClickUp](https://clickup.com/) API (ClickUp 2.0). If you have any suggestions or questions contact me or create a feature request/bug report.
 
-##### Info: 
+##### Info:
 - English isn’t my first language, so please excuse any mistakes.
 - Contact me for proposals or questions.
 - This project uses the library [Gson](https://github.com/google/gson) for JSON interactions.
 
 ## Getting Started
-1. add ClickUp-Java to your project
-2. add Gson 2.4 or higher to your project
+
+### Download And Use
+1. download last releases from [GitHub](https://github.com/SCHREDDO/ClickUp-Java/releases)
+2. add ClickUp-Java to your project
+3. add Gson 2.4 or higher to your project
+
+### Building From Source
+1. clone ClickUp-Java go in the folder '\ClickUp-Java\ClickUp-Java'
+2. build ClickUp-Java 'jar cvf clickup-java.jar -C src\main\java .'
+3. add ClickUp-Java to your project
+4. add Gson 2.4 or higher to your project
 
 ## Usage
 ### API Calls
@@ -56,34 +61,6 @@ A list of available API calls of the ClickUp API. For more information [click he
 
 ### Examples
 
-#### Initialize ClickUp-Java
-```java
-ClickUp clickUp = new ClickUp("<Client Id>", "<Client Secret>", "<Code>");
-```
-
-#### Initialize ClickUp-Java with API Token
-```java
-ClickUp clickUp = new ClickUp("<API Token>");
-```
-
-#### Get Tasks as JSON
-```java
-System.out.println(clickUp.getTasks((long) 1111111, false).json());
-```
-
-#### Get Tasks as object
-```java
-System.out.println(((ArrayList<CUTask>) clickUp.getTasks((long) 1111111, false).obj()).get(0).getName());
-```
-
-#### Delete Task
-```java
-if (clickUp.deleteTask("00a0aa")) {
-	System.out.println("Task deleted");
-}
-```
-
-
 ## Dependencies
 ### Runtime Dependencies
 - Java 1.5 or higher
@@ -93,65 +70,6 @@ if (clickUp.deleteTask("00a0aa")) {
 - Gson 2.4
 
 ## Changelog
-### = 0.1.0-alpha October 21st 2019 =
-#### Added
-- API Call: Get Access Token
-- API Call: Get Authorized User
-- API Call: Get Authorized Teams
-- API Call: Get Teams
-- API Call: Create Space
-- API Call: Update Space
-- API Call: Delete Space
-- API Call: Get Spaces
-- API Call: Get Space
-- API Call: Create Folder
-- API Call: Update Folder
-- API Call: Delete Folder
-- API Call: Get Folders
-- API Call: Get Folder
-- API Call: Create List
-- API Call: Create Folderless List
-- API Call: Update List
-- API Call: Delete List
-- API Call: Get Lists
-- API Call: Get Folderless Lists
-- API Call: Get List
-- API Call: Create Task
-- API Call: Update Task
-- API Call: Delete Task
-- API Call: Get Tasks
-- API Call: Get Task
-- API Call: Get List Members
-- API Call: Get Task Members
-- Object: CUAttachment
-- Object: CUChecklist
-- Object: CUChecklistItem
-- Object: CUCustomField
-- Object: CUFolder
-- Object: CUList
-- Object: CUMember
-- Object: CUSpace
-- Object: CUStatus
-- Object: CUTag
-- Object: CUTask
-- Object: CUTeam
-- Object: CUWebhook
-- Object: CUFeatures
-- Object: CUOption
-- Object: CUPriority
-- Object: CUTypeConfig
-- Object: CUFChecklists
-- Object: CUFCheckUnresolved
-- Object: CUFCustomFields
-- Object: CUFDependencyWarning
-- Object: CUFDueDates
-- Object: CUFPortfolios
-- Object: CUFPriorities
-- Object: CUFRemapDependencies
-- Object: CUFTags
-- Object: CUFTimeEstimates
-- Object: CUFTimeTracking
-
 
 ## Support Possibilities
 - give proposals
