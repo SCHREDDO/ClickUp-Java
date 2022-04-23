@@ -58,6 +58,7 @@ import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetTasksRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.UpdateTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.teams.GetTeamsRequest;
+import io.github.schreddo.nerdy.clickup.api.response.CUDeleteResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 
 public class ClickUp {
@@ -197,9 +198,8 @@ public class ClickUp {
 	}
 	
 	public boolean deleteTask(String taskID) {
-		ClickUpResponse<Object> response = new DeleteTaskRequest(getAccessToken(), taskID).execute();
-		
-		if (response.code() == 200) {
+		CUDeleteResponse response = new DeleteTaskRequest(getAccessToken(), taskID).execute();
+		if (response.code() == 204) {
 			return true;
 		} else {
 			return false;
