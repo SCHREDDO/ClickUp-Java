@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,173 +19,135 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 23.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api.requests.tasks;
 
-import io.github.schreddo.nerdy.clickup.api.models.CUTask;
-import io.github.schreddo.nerdy.clickup.api.response.ClickUpResponse;
+import io.github.schreddo.nerdy.clickup.api.models.filter.CUTeamTaskFilterOptions;
+import io.github.schreddo.nerdy.clickup.api.requests.ClickUpRequest;
+import io.github.schreddo.nerdy.clickup.api.response.CUTasksResponse;
+import io.github.schreddo.nerdy.http.request.HTTPRequest;
+import io.github.schreddo.nerdy.http.request.enums.RequestMethod;
+import io.github.schreddo.nerdy.http.request.models.Response;
 
-public class GetFilteredTeamTasksRequest {
-	private String accessToken;
-	private String teamID;
-	private Integer page;
-	private String orderBY;
-	private Boolean reverse;
-	private Boolean subtasks;
-	private String[] spaceIDs;
-	private String[] projectIDs;
-	private String[] listIDs;
-	private String[] statuses;
-	private Boolean includeClosed;
-	private String[] assignees;
-	private String[] tags;
-	private Integer dueDateGT;
-	private Integer dueDateLT;
-	private Integer dateCreatedGT;
-	private Integer dateCreatedLT;
-	private Integer dateUpdatedGT;
-	private Integer dateUpdatedLT;
+public class GetFilteredTeamTasksRequest extends ClickUpRequest {
 	
-	public String getAccessToken() {
-		return accessToken;
-	}
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-	public String getTeamID() {
+	private Long teamID;
+	private CUTeamTaskFilterOptions filterOptions;
+	
+	public Long getTeamID() {
 		return teamID;
 	}
-	public void setTeamID(String teamID) {
+	public void setTeamID(Long teamID) {
 		this.teamID = teamID;
 	}
-	public Integer getPage() {
-		return page;
+	public CUTeamTaskFilterOptions getFilterOptions() {
+		return filterOptions;
 	}
-	public void setPage(Integer page) {
-		this.page = page;
+	public void setFilterOptions(CUTeamTaskFilterOptions filterOptions) {
+		this.filterOptions = filterOptions;
 	}
-	public String getOrderBY() {
-		return orderBY;
-	}
-	public void setOrderBY(String orderBY) {
-		this.orderBY = orderBY;
-	}
-	public Boolean getReverse() {
-		return reverse;
-	}
-	public void setReverse(Boolean reverse) {
-		this.reverse = reverse;
-	}
-	public Boolean getSubtasks() {
-		return subtasks;
-	}
-	public void setSubtasks(Boolean subtasks) {
-		this.subtasks = subtasks;
-	}
-	public String[] getSpaceIDs() {
-		return spaceIDs;
-	}
-	public void setSpaceIDs(String[] spaceIDs) {
-		this.spaceIDs = spaceIDs;
-	}
-	public String[] getProjectIDs() {
-		return projectIDs;
-	}
-	public void setProjectIDs(String[] projectIDs) {
-		this.projectIDs = projectIDs;
-	}
-	public String[] getListIDs() {
-		return listIDs;
-	}
-	public void setListIDs(String[] listIDs) {
-		this.listIDs = listIDs;
-	}
-	public String[] getStatuses() {
-		return statuses;
-	}
-	public void setStatuses(String[] statuses) {
-		this.statuses = statuses;
-	}
-	public Boolean getIncludeClosed() {
-		return includeClosed;
-	}
-	public void setIncludeClosed(Boolean includeClosed) {
-		this.includeClosed = includeClosed;
-	}
-	public String[] getAssignees() {
-		return assignees;
-	}
-	public void setAssignees(String[] assignees) {
-		this.assignees = assignees;
-	}
-	public String[] getTags() {
-		return tags;
-	}
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
-	public Integer getDueDateGT() {
-		return dueDateGT;
-	}
-	public void setDueDateGT(Integer dueDateGT) {
-		this.dueDateGT = dueDateGT;
-	}
-	public Integer getDueDateLT() {
-		return dueDateLT;
-	}
-	public void setDueDateLT(Integer dueDateLT) {
-		this.dueDateLT = dueDateLT;
-	}
-	public Integer getDateCreatedGT() {
-		return dateCreatedGT;
-	}
-	public void setDateCreatedGT(Integer dateCreatedGT) {
-		this.dateCreatedGT = dateCreatedGT;
-	}
-	public Integer getDateCreatedLT() {
-		return dateCreatedLT;
-	}
-	public void setDateCreatedLT(Integer dateCreatedLT) {
-		this.dateCreatedLT = dateCreatedLT;
-	}
-	public Integer getDateUpdatedGT() {
-		return dateUpdatedGT;
-	}
-	public void setDateUpdatedGT(Integer dateUpdatedGT) {
-		this.dateUpdatedGT = dateUpdatedGT;
-	}
-	public Integer getDateUpdatedLT() {
-		return dateUpdatedLT;
-	}
-	public void setDateUpdatedLT(Integer dateUpdatedLT) {
-		this.dateUpdatedLT = dateUpdatedLT;
-	}
-	
-	public GetFilteredTeamTasksRequest(String accessToken, String teamID, int page) {
-		setAccessToken(accessToken);
+
+	public GetFilteredTeamTasksRequest(String accessToken, Long teamID) {
+		super(accessToken);
+		
 		setTeamID(teamID);
-		setPage(page);
-		setOrderBY(null);
-		setReverse(null);
-		setSubtasks(null);
-		setSpaceIDs(null);
-		setProjectIDs(null);
-		setListIDs(null);
-		setStatuses(null);
-		setIncludeClosed(null);
-		setAssignees(null);
-		setTags(null);
-		setDueDateGT(null);
-		setDueDateLT(null);
-		setDateCreatedGT(null);
-		setDateCreatedLT(null);
-		setDateUpdatedGT(null);
-		setDateUpdatedLT(null);
+		setFilterOptions(null);
 	}
 	
-	public ClickUpResponse<CUTask[]> execute() {
-		return null;
+	public GetFilteredTeamTasksRequest(String accessToken, Long teamID, CUTeamTaskFilterOptions filterOptions) {
+		super(accessToken);
+		
+		setTeamID(teamID);
+		setFilterOptions(filterOptions);
+	}
+	
+	@Override
+	public CUTasksResponse execute() {
+		HTTPRequest httpRequest = new HTTPRequest("https://api.clickup.com/api/v2/team/" + getTeamID() + "/task", RequestMethod.GET);
+		httpRequest.addHeaderProperty("Authorization", getAccessToken());
+		httpRequest.addHeaderProperty("Content-Type", "application/json");
+		
+		if (getFilterOptions() != null) {
+			httpRequest = addFilterOptions(httpRequest);
+		}
+		
+		Response response = httpRequest.executeRequest();
+		
+		return new CUTasksResponse(response.getResponseCode(), response.getResponse());
+	}
+	
+	private HTTPRequest addFilterOptions(HTTPRequest httpRequest) {
+		if (getFilterOptions().getPage() != null)
+			httpRequest.addURLParamenter("page", getFilterOptions().toString());
+		if (getFilterOptions().getOrderBy() != null)
+			httpRequest.addURLParamenter("order_by", getFilterOptions().getOrderBy());
+		if (getFilterOptions().getReverse() != null)
+			httpRequest.addURLParamenter("reverse", getFilterOptions().getReverse().toString());
+		if (getFilterOptions().getSubtasks() != null)
+			httpRequest.addURLParamenter("subtasks", getFilterOptions().getSubtasks().toString());
+		if (getFilterOptions().getStatuses() != null) {
+			for (int i = 0; i < getFilterOptions().getStatuses().size(); i++) {
+				httpRequest.addURLParamenter("statuses[]", getFilterOptions().getStatuses().get(i).getStatus());	
+			}
+		}
+		if (getFilterOptions().getSpaces() != null) {
+			for (int i = 0; i < getFilterOptions().getSpaces().size(); i++) {
+				httpRequest.addURLParamenter("space_ids[]", getFilterOptions().getSpaces().get(i).getID());	
+			}
+		}
+		if (getFilterOptions().getProjects() != null) {
+			for (int i = 0; i < getFilterOptions().getProjects().size(); i++) {
+				httpRequest.addURLParamenter("project_ids[]", getFilterOptions().getProjects().get(i).getID());	
+			}
+		}
+		if (getFilterOptions().getLists() != null) {
+			for (int i = 0; i < getFilterOptions().getLists().size(); i++) {
+				httpRequest.addURLParamenter("list_ids[]", getFilterOptions().getLists().get(i).getID());	
+			}
+		}
+		if (getFilterOptions().getTags() != null) {
+			for (int i = 0; i < getFilterOptions().getTags().size(); i++) {
+				httpRequest.addURLParamenter("tags[]", getFilterOptions().getTags().get(i).getName());	
+			}
+		}
+		if (getFilterOptions().getIncludeClosed() != null)
+			httpRequest.addURLParamenter("include_closed", getFilterOptions().getIncludeClosed().toString());
+		if (getFilterOptions().getAssignees() != null) {
+			for (int i = 0; i < getFilterOptions().getAssignees().size(); i++) {
+				httpRequest.addURLParamenter("assignees[]", getFilterOptions().getAssignees().get(i).getID().toString());	
+			}
+		}
+		if (getFilterOptions().getDueDateGT() != null)
+			httpRequest.addURLParamenter("due_date_gt", getFilterOptions().getDueDateGT().toString());
+		if (getFilterOptions().getDueDateLT() != null)
+			httpRequest.addURLParamenter("due_date_lt", getFilterOptions().getDueDateLT().toString());
+		if (getFilterOptions().getDateCreatedGT() != null)
+			httpRequest.addURLParamenter("date_created_gt", getFilterOptions().getDateCreatedGT().toString());
+		if (getFilterOptions().getDateCreatedLT() != null)
+			httpRequest.addURLParamenter("date_created_lt", getFilterOptions().getDateCreatedLT().toString());
+		if (getFilterOptions().getDateUpdatedGT() != null)
+			httpRequest.addURLParamenter("date_updated_gt", getFilterOptions().getDateUpdatedGT().toString());
+		if (getFilterOptions().getDateUpdatedLT() != null)
+			httpRequest.addURLParamenter("date_updated_lt", getFilterOptions().getDateUpdatedLT().toString());
+		if (getFilterOptions().getCustomFields() != null) {
+			String customFieldsArray = "[";
+			for (int i = 0; i < getFilterOptions().getCustomFields().size(); i++) {
+				customFieldsArray += getFilterOptions().getCustomFields().get(i).toJsonString();
+				if ((i + 1) < getFilterOptions().getCustomFields().size()) {
+					customFieldsArray += ",";
+				}
+			}
+			customFieldsArray += "]";
+			
+			httpRequest.addURLParamenter("custom_fields", customFieldsArray);
+		}
+		if (getFilterOptions().getUseCustomTaskIDs() != null)
+			httpRequest.addURLParamenter("custom_task_ids", getFilterOptions().getUseCustomTaskIDs().toString());
+		if (getFilterOptions().getTeamID() != null)
+			httpRequest.addURLParamenter("date_created_gt", getFilterOptions().getTeamID());
+		
+		return httpRequest;
 	}
 }
