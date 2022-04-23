@@ -192,7 +192,7 @@ public class ClickUp {
 		return new CreateTaskRequest(getAccessToken(), listID, task).execute();
 	}
 	
-	public ClickUpResponse<CUTask> updateTask(String taskID, CUTask task) {
+	public CUTaskResponse updateTask(String taskID, CUTask task) {
 		return new UpdateTaskRequest(getAccessToken(), taskID, task).execute();
 	}
 	
