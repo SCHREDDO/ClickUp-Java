@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,52 +19,30 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 23.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api.response;
 
-import java.util.Arrays;
-
-import com.google.gson.Gson;
-
-import io.github.schreddo.nerdy.clickup.api.enums.ResponsesType;
-import io.github.schreddo.nerdy.clickup.api.models.CUFolder;
-import io.github.schreddo.nerdy.clickup.api.models.CUTask;
-import io.github.schreddo.nerdy.clickup.api.models.base.BaseCollection;
-
-public class ClickUpResponse<T> {
+public abstract class ClickUpResponse {
 	
-	private final Class<T> convertClass;
-	private ResponsesType responsesType;
-	private int responseCode;
-	private String json;
+	protected int responseCode;
+	protected String json;
 
-	private Class<T> getConvertClass() {
-		return convertClass;
-	}
-	private ResponsesType getResponsesType() {
-		return responsesType;
-	}
-	private void setResponsesType(ResponsesType responsesType) {
-		this.responsesType = responsesType;
-	}
-	private int getResponseCode() {
+	protected int getResponseCode() {
 		return responseCode;
 	}
-	private void setResponseCode(int responseCode) {
+	protected void setResponseCode(int responseCode) {
 		this.responseCode = responseCode;
 	}
-	private String getJson() {
+	protected String getJson() {
 		return json;
 	}
-	private void setJson(String json) {
+	protected void setJson(String json) {
 		this.json = json;
 	}
 
-	public ClickUpResponse(Class<T> convertClass, int responseCode, String json, ResponsesType responsesType) {
-		this.convertClass = convertClass;
-		setResponsesType(responsesType);
+	public ClickUpResponse(int responseCode, String json) {
 		setResponseCode(responseCode);
 		setJson(json);
 	}
@@ -77,64 +55,5 @@ public class ClickUpResponse<T> {
 		return getJson();
 	}
 	
-	public Object obj() {
-		Gson gson = new Gson();
-		
-		switch (getResponsesType()) {
-		case OBJECT:
-			return gson.fromJson(getJson(), getConvertClass());
-		case TASKAS_AL:
-			return Arrays.asList((CUTask[])gson.fromJson(getJson(), getConvertClass()));
-		case FOLDERS_AL:
-			return Arrays.asList((CUFolder[])gson.fromJson(getJson(), getConvertClass()));
-		case ATTACHMENT_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getAttachment();
-		case CHECKLIST_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getChecklist();
-		case COMMENTS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getComments();
-		case DATA_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getData();
-		case FIELDS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getFields();
-		case FOLDERS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getFolders();
-		case GOALS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getGoals();
-		case GOAL_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getGoal();
-		case KEY_RESULT_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getKeyResult();
-		case LISTS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getLists();
-		case MEMBERS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getMembers();
-		case SHARED_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getShared();
-		case SPACES_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getSpaces();
-		case TAGS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getTags();
-		case TAG_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getTag();
-		case TASKS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getTasks();
-		case TASK_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getTag();
-		case TEAMS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getTeams();
-		case TEMPLATES_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getTemplates();
-		case USER_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getUser();
-		case VIEWS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getViews();
-		case VIEW_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getView();
-		case WEBHOOKS_BC:
-			return ((BaseCollection)gson.fromJson(getJson(), getConvertClass())).getWebhooks();
-		default:
-			return gson.fromJson(getJson(), getConvertClass());
-		}
-	}
+	public abstract Object obj();
 }
