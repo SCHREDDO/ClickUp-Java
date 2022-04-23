@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,28 +19,21 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 23.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api.requests.tasks;
 
-import io.github.schreddo.nerdy.clickup.api.enums.ResponsesType;
-import io.github.schreddo.nerdy.clickup.api.models.CUTask;
-import io.github.schreddo.nerdy.clickup.api.response.ClickUpResponse;
+import io.github.schreddo.nerdy.clickup.api.requests.ClickUpRequest;
+import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 import io.github.schreddo.nerdy.http.request.HTTPRequest;
 import io.github.schreddo.nerdy.http.request.enums.RequestMethod;
 import io.github.schreddo.nerdy.http.request.models.Response;
 
-public class GetTaskRequest {
-	private String accessToken;
+public class GetTaskRequest extends ClickUpRequest {
+	
 	private String taskID;
 	
-	public String getAccessToken() {
-		return accessToken;
-	}
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
 	public String getTaskID() {
 		return taskID;
 	}
@@ -49,17 +42,19 @@ public class GetTaskRequest {
 	}
 	
 	public GetTaskRequest(String accessToken, String taskID) {
-		setAccessToken(accessToken);
+		super(accessToken);
+		
 		setTaskID(taskID);
 	}
 	
-	public ClickUpResponse<CUTask> execute() {
+	@Override
+	public CUTaskResponse execute() {
 		HTTPRequest httpRequest = new HTTPRequest("https://api.clickup.com/api/v2/task/" + getTaskID(), RequestMethod.GET);
 		httpRequest.addHeaderProperty("Authorization", getAccessToken());
 		httpRequest.addHeaderProperty("Content-Type", "application/json");
 		
 		Response response = httpRequest.executeRequest();
 		
-		return new ClickUpResponse<CUTask>(CUTask.class, response.getResponseCode(), response.getResponse(), ResponsesType.OBJECT);
+		return new CUTaskResponse(response.getResponseCode(), response.getResponse());
 	}
 }

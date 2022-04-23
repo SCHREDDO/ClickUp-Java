@@ -210,7 +210,7 @@ public class ClickUp {
 		return new GetTasksRequest(getAccessToken(), listID, archived).execute();
 	}
 	
-	public ClickUpResponse<CUTask> getTask(String taskID) {
+	public CUTaskResponse getTask(String taskID) {
 		return new GetTaskRequest(getAccessToken(), taskID).execute();
 	}
 	
