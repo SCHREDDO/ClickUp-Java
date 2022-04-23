@@ -30,6 +30,7 @@ import io.github.schreddo.nerdy.clickup.api.models.CUSpace;
 import io.github.schreddo.nerdy.clickup.api.models.CUTask;
 import io.github.schreddo.nerdy.clickup.api.models.base.Authorization;
 import io.github.schreddo.nerdy.clickup.api.models.base.BaseCollection;
+import io.github.schreddo.nerdy.clickup.api.models.filter.CUTaskFilterOptions;
 import io.github.schreddo.nerdy.clickup.api.requests.authorization.AccessTokenRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.authorization.GetAuthorizedTeamsRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.authorization.GetAuthorizedUserRequest;
@@ -60,6 +61,7 @@ import io.github.schreddo.nerdy.clickup.api.requests.tasks.UpdateTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.teams.GetTeamsRequest;
 import io.github.schreddo.nerdy.clickup.api.response.CUDeleteResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTasksResponse;
 
 public class ClickUp {
 	private String accessToken;
@@ -206,8 +208,8 @@ public class ClickUp {
 		}
 	}
 	
-	public ClickUpResponse<BaseCollection> getTasks(Long listID, Boolean archived) {
-		return new GetTasksRequest(getAccessToken(), listID, archived).execute();
+	public CUTasksResponse getTasks(Long listID, CUTaskFilterOptions filterOptions) {
+		return new GetTasksRequest(getAccessToken(), listID, filterOptions).execute();
 	}
 	
 	public CUTaskResponse getTask(String taskID) {
