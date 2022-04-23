@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,31 +19,25 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 23.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api.requests.tasks;
 
 import com.google.gson.Gson;
 
-import io.github.schreddo.nerdy.clickup.api.enums.ResponsesType;
 import io.github.schreddo.nerdy.clickup.api.models.CUTask;
-import io.github.schreddo.nerdy.clickup.api.response.ClickUpResponse;
+import io.github.schreddo.nerdy.clickup.api.requests.ClickUpRequest;
+import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 import io.github.schreddo.nerdy.http.request.HTTPRequest;
 import io.github.schreddo.nerdy.http.request.enums.RequestMethod;
 import io.github.schreddo.nerdy.http.request.models.Response;
 
-public class CreateTaskRequest {
-	private String accessToken;
+public class CreateTaskRequest extends ClickUpRequest {
+	
 	private Long listID;
 	private CUTask task;
 	
-	public String getAccessToken() {
-		return accessToken;
-	}
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
 	public Long getListID() {
 		return listID;
 	}
@@ -58,12 +52,14 @@ public class CreateTaskRequest {
 	}
 	
 	public CreateTaskRequest(String accessToken, Long listID, CUTask task) {
-		setAccessToken(accessToken);
+		super(accessToken);
+		
 		setListID(listID);
 		setTask(task);
 	}
 	
-	public ClickUpResponse<CUTask> execute() {
+	@Override
+	public CUTaskResponse execute() {
 		Gson gson = new Gson();
 		HTTPRequest httpRequest = new HTTPRequest("https://api.clickup.com/api/v2/list/" + getListID() + "/task", RequestMethod.POST);
 		httpRequest.addHeaderProperty("Authorization", getAccessToken());
@@ -72,6 +68,6 @@ public class CreateTaskRequest {
 		
 		Response response = httpRequest.executeRequest();
 		
-		return new ClickUpResponse<CUTask>(CUTask.class, response.getResponseCode(), response.getResponse(), ResponsesType.OBJECT);
+		return new CUTaskResponse(response.getResponseCode(), response.getResponse());
 	}
 }

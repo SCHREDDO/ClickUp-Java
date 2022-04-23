@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,7 +19,7 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 23.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api;
@@ -58,7 +58,7 @@ import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetTasksRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.UpdateTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.teams.GetTeamsRequest;
-import io.github.schreddo.nerdy.clickup.api.response.ClickUpResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 
 public class ClickUp {
 	private String accessToken;
@@ -188,7 +188,7 @@ public class ClickUp {
 		return new GetListRequest(getAccessToken(), listID).execute();
 	}
 	
-	public ClickUpResponse<CUTask> createTask(Long listID, CUTask task) {
+	public CUTaskResponse createTask(Long listID, CUTask task) {
 		return new CreateTaskRequest(getAccessToken(), listID, task).execute();
 	}
 	
