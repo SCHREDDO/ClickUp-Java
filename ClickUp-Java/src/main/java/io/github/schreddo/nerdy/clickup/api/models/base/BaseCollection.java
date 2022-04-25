@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,7 +19,7 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 25.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api.models.base;
@@ -40,14 +40,18 @@ import io.github.schreddo.nerdy.clickup.api.models.CUSpace;
 import io.github.schreddo.nerdy.clickup.api.models.CUTag;
 import io.github.schreddo.nerdy.clickup.api.models.CUTask;
 import io.github.schreddo.nerdy.clickup.api.models.CUTeam;
+import io.github.schreddo.nerdy.clickup.api.models.CUUser;
 import io.github.schreddo.nerdy.clickup.api.models.CUView;
 import io.github.schreddo.nerdy.clickup.api.models.CUWebhook;
 
 public class BaseCollection {
+	
 	@SerializedName("attachment")
 	private CUAttachment attachment;
 	@SerializedName("user")
-	private CUMember user;
+	private CUUser user;
+	@SerializedName("team")
+	private CUTeam team;
 	@SerializedName("teams")
 	private ArrayList<CUTeam> teams;
 	@SerializedName("checklist")
@@ -66,6 +70,8 @@ public class BaseCollection {
 	private Object keyResult;
 	@SerializedName("lists")
 	private ArrayList<CUList> lists;
+	@SerializedName("member")
+	private CUMember member;
 	@SerializedName("members")
 	private ArrayList<CUMember> members;
 	@SerializedName("shared")
@@ -96,11 +102,17 @@ public class BaseCollection {
 	public void setAttachment(CUAttachment attachment) {
 		this.attachment = attachment;
 	}
-	public CUMember getUser() {
+	public CUUser getUser() {
 		return user;
 	}
-	public void setUser(CUMember user) {
+	public void setUser(CUUser user) {
 		this.user = user;
+	}
+	public CUTeam getTeam() {
+		return team;
+	}
+	public void setTeam(CUTeam team) {
+		this.team = team;
 	}
 	public ArrayList<CUTeam> getTeams() {
 		return teams;
@@ -155,6 +167,12 @@ public class BaseCollection {
 	}
 	public void setLists(ArrayList<CUList> lists) {
 		this.lists = lists;
+	}
+	public CUMember getMember() {
+		return member;
+	}
+	public void setMember(CUMember member) {
+		this.member = member;
 	}
 	public ArrayList<CUMember> getMembers() {
 		return members;

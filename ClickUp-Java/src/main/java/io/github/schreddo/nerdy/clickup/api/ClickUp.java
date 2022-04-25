@@ -61,9 +61,15 @@ import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetTasksRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.UpdateTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.teams.GetTeamsRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.users.EditUserOnWorkspaceRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.users.GetUserRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.users.InviteUserToWorkspaceRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.users.RemoveUserFromWorkspaceRequest;
 import io.github.schreddo.nerdy.clickup.api.response.CUDeleteResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUMemberResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTasksResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTeamResponse;
 
 public class ClickUp {
 	private String accessToken;
@@ -228,5 +234,21 @@ public class ClickUp {
 	
 	public ClickUpResponse<BaseCollection> getTaskMembers(String taskID) {
 		return new GetTaskMembersRequest(getAccessToken(), taskID).execute();
+	}
+	
+	public CUTeamResponse inviteUserToWoekspace(String teamID, String email, Boolean asAdmin) {
+		return new InviteUserToWorkspaceRequest(getAccessToken(), teamID, email, asAdmin).execute();
+	}
+	
+	public CUMemberResponse editUserOnWorkspace(String teamID, Long userID, String username, Boolean asAdmin) {
+		return new EditUserOnWorkspaceRequest(getAccessToken(), teamID, userID, username, asAdmin).execute();
+	}
+	
+	public CUTeamResponse removeUserFromWorkspace(String teamID, Long userID) {
+		return new RemoveUserFromWorkspaceRequest(getAccessToken(), teamID, userID).execute();
+	}
+	
+	public CUMemberResponse getUser(String teamID, Long userID) {
+		return new GetUserRequest(getAccessToken(), teamID, userID).execute();
 	}
 }
