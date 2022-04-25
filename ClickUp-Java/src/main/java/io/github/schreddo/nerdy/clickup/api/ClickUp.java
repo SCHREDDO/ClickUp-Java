@@ -70,6 +70,7 @@ import io.github.schreddo.nerdy.clickup.api.response.CUMemberResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTasksResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTeamResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTeamsResponse;
 
 public class ClickUp {
 	private String accessToken;
@@ -109,7 +110,7 @@ public class ClickUp {
 		return new GetAuthorizedTeamsRequest(getAccessToken()).execute();
 	}
 	
-	public ClickUpResponse<BaseCollection> getTeams() {
+	public CUTeamsResponse getTeams() {
 		return new GetTeamsRequest(getAccessToken()).execute();
 	}
 	
