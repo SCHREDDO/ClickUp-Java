@@ -27,6 +27,7 @@ package io.github.schreddo.nerdy.clickup.api;
 import io.github.schreddo.nerdy.clickup.api.models.CUFolder;
 import io.github.schreddo.nerdy.clickup.api.models.CUList;
 import io.github.schreddo.nerdy.clickup.api.models.CUSpace;
+import io.github.schreddo.nerdy.clickup.api.models.CUTag;
 import io.github.schreddo.nerdy.clickup.api.models.CUTask;
 import io.github.schreddo.nerdy.clickup.api.models.base.Authorization;
 import io.github.schreddo.nerdy.clickup.api.models.base.BaseCollection;
@@ -54,6 +55,12 @@ import io.github.schreddo.nerdy.clickup.api.requests.spaces.DeleteSpaceRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.spaces.GetSpaceRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.spaces.GetSpacesRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.spaces.UpdateSpaceRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.tags.AddTagToTaskRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.tags.CreateSpaceTagRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.tags.DeleteSpaceTagRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.tags.EditSpaceTagRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.tags.GetSpaceTagsRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.tags.RemoveTagFromTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.CreateTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.DeleteTaskRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.tasks.GetFilteredTeamTasksRequest;
@@ -66,7 +73,10 @@ import io.github.schreddo.nerdy.clickup.api.requests.users.GetUserRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.users.InviteUserToWorkspaceRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.users.RemoveUserFromWorkspaceRequest;
 import io.github.schreddo.nerdy.clickup.api.response.CUDeleteResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUEmptyResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUMemberResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTagResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTagsResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTasksResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTeamResponse;
@@ -251,5 +261,29 @@ public class ClickUp {
 	
 	public CUMemberResponse getUser(String teamID, Long userID) {
 		return new GetUserRequest(getAccessToken(), teamID, userID).execute();
+	}
+	
+	public CUEmptyResponse addTagToTask(String taskID, String tagName) {
+		return new AddTagToTaskRequest(getAccessToken(), taskID, tagName).execute();
+	}
+	
+	public CUEmptyResponse createSpaceTag(String spaceID, CUTag tag) {
+		return new CreateSpaceTagRequest(getAccessToken(), spaceID, tag).execute();
+	}
+	
+	public CUTagResponse editSpaceTag(String spaceID, String tagName) {
+		return new EditSpaceTagRequest(getAccessToken(), spaceID, tagName).execute();
+	}
+	
+	public CUTagsResponse getSpaceTags(String spaceID) {
+		return new GetSpaceTagsRequest(getAccessToken(), spaceID).execute();
+	}
+	
+	public CUDeleteResponse deleteSpaceTag(String spaceID, CUTag tag) {
+		return new DeleteSpaceTagRequest(getAccessToken(), spaceID, tag).execute();
+	}
+	
+	public CUDeleteResponse removeTagFromTask(String taskID, String tagName) {
+		return new RemoveTagFromTaskRequest(getAccessToken(), taskID, tagName).execute();
 	}
 }
