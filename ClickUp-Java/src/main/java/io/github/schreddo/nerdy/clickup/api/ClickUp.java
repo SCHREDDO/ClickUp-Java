@@ -83,6 +83,8 @@ import io.github.schreddo.nerdy.clickup.api.response.CUTaskResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTasksResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTeamResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUTeamsResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUUserResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUUsersResponse;
 
 public class ClickUp {
 	private String accessToken;
@@ -249,11 +251,11 @@ public class ClickUp {
 		return new GetFilteredTeamTasksRequest(getAccessToken(), teamID, filterOptions).execute();
 	}
 	
-	public ClickUpResponseOld<BaseCollection> getListMembers(Long listID) {
+	public CUUsersResponse getListMembers(Long listID) {
 		return new GetListMembersRequest(getAccessToken(), listID).execute();
 	}
 	
-	public ClickUpResponse<BaseCollection> getTaskMembers(String taskID) {
+	public CUUsersResponse getTaskMembers(String taskID) {
 		return new GetTaskMembersRequest(getAccessToken(), taskID).execute();
 	}
 	

@@ -73,7 +73,7 @@ public class BaseCollection {
 	@SerializedName("member")
 	private CUMember member;
 	@SerializedName("members")
-	private ArrayList<CUMember> members;
+	private ArrayList<CUUser> users;
 	@SerializedName("shared")
 	private Object shared;
 	@SerializedName("spaces")
@@ -169,16 +169,16 @@ public class BaseCollection {
 		this.lists = lists;
 	}
 	public CUMember getMember() {
-		return member;
+		return this.member;
 	}
 	public void setMember(CUMember member) {
 		this.member = member;
 	}
-	public ArrayList<CUMember> getMembers() {
-		return members;
+	public ArrayList<CUUser> getUsers() {
+		return this.users;
 	}
-	public void setMembers(ArrayList<CUMember> members) {
-		this.members = members;
+	public void setUsers(ArrayList<CUUser> users) {
+		this.users = users;
 	}
 	public Object getShared() {
 		return shared;
