@@ -74,6 +74,7 @@ import io.github.schreddo.nerdy.clickup.api.requests.users.EditUserOnWorkspaceRe
 import io.github.schreddo.nerdy.clickup.api.requests.users.GetUserRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.users.InviteUserToWorkspaceRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.users.RemoveUserFromWorkspaceRequest;
+import io.github.schreddo.nerdy.clickup.api.response.CUAccessTokenResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUDeleteResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUEmptyResponse;
 import io.github.schreddo.nerdy.clickup.api.response.CUMemberResponse;
@@ -105,10 +106,10 @@ public class ClickUp {
 	}
 	
 	public Boolean getAccessToken(String clientId, String clientSecret, String code) {
-		ClickUpResponse<Authorization> response = new AccessTokenRequest(clientId, clientSecret, code).execute();
+		CUAccessTokenResponse response = new AccessTokenRequest(clientId, clientSecret, code).execute();
 		
 		if (response.code() == 200) {
-			setAccessToken(((Authorization) response.obj()).getAccessToken());
+			setAccessToken(response.obj().getAccessToken());
 			
 			return true;
 		} else {
@@ -116,11 +117,11 @@ public class ClickUp {
 		}
 	}
 	
-	public ClickUpResponse<BaseCollection> getAuthorizedUser() {
+	public CUUserResponse getAuthorizedUser() {
 		return new GetAuthorizedUserRequest(getAccessToken()).execute();
 	}
 	
-	public ClickUpResponse<BaseCollection> getAuthorizedTeams() {
+	public CUTeamsResponse getAuthorizedTeams() {
 		return new GetAuthorizedTeamsRequest(getAccessToken()).execute();
 	}
 	

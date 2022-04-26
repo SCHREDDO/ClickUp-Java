@@ -1,4 +1,4 @@
-// Copyright (C) 2019 Sebastian Lühnen
+// Copyright (C) 2019-2022 Sebastian Lühnen
 //
 //
 // This file is part of ClickUp-Java.
@@ -19,14 +19,12 @@
 //
 // Created By: Sebastian Lühnen
 // Created On: 14.09.2019
-// Last Edited On: 19.10.2019
+// Last Edited On: 26.04.2022
 // Language: Java
 //
 package io.github.schreddo.nerdy.clickup.api.requests.authorization;
 
-import io.github.schreddo.nerdy.clickup.api.enums.ResponsesType;
-import io.github.schreddo.nerdy.clickup.api.models.base.BaseCollection;
-import io.github.schreddo.nerdy.clickup.api.response.ClickUpResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUTeamsResponse;
 import io.github.schreddo.nerdy.http.request.HTTPRequest;
 import io.github.schreddo.nerdy.http.request.enums.RequestMethod;
 import io.github.schreddo.nerdy.http.request.models.Response;
@@ -45,12 +43,12 @@ public class GetAuthorizedTeamsRequest {
 		setAccessToken(accessToken);
 	}
 	
-	public ClickUpResponse<BaseCollection> execute() {		
+	public CUTeamsResponse execute() {		
 		HTTPRequest httpRequest = new HTTPRequest("https://api.clickup.com/api/v2/team", RequestMethod.GET);
 		httpRequest.addHeaderProperty("Authorization", getAccessToken());
 		
 		Response response = httpRequest.executeRequest();
 		
-		return new ClickUpResponse<BaseCollection>(BaseCollection.class, response.getResponseCode(), response.getResponse(), ResponsesType.TEAMS_BC);
+		return new CUTeamsResponse(response.getResponseCode(), response.getResponse());
 	}
 }

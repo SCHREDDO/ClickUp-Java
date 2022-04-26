@@ -24,9 +24,7 @@
 //
 package io.github.schreddo.nerdy.clickup.api.requests.authorization;
 
-import io.github.schreddo.nerdy.clickup.api.enums.ResponsesType;
-import io.github.schreddo.nerdy.clickup.api.models.base.BaseCollection;
-import io.github.schreddo.nerdy.clickup.api.response.ClickUpResponse;
+import io.github.schreddo.nerdy.clickup.api.response.CUUserResponse;
 import io.github.schreddo.nerdy.http.request.HTTPRequest;
 import io.github.schreddo.nerdy.http.request.enums.RequestMethod;
 import io.github.schreddo.nerdy.http.request.models.Response;
@@ -45,12 +43,12 @@ public class GetAuthorizedUserRequest {
 		setAccessToken(accessToken);
 	}
 	
-	public ClickUpResponse<BaseCollection> execute() {		
+	public CUUserResponse execute() {		
 		HTTPRequest httpRequest = new HTTPRequest("https://api.clickup.com/api/v2/user", RequestMethod.GET);
 		httpRequest.addHeaderProperty("Authorization", getAccessToken());
 		
 		Response response = httpRequest.executeRequest();
 		
-		return new ClickUpResponse<BaseCollection>(BaseCollection.class, response.getResponseCode(), response.getResponse(), ResponsesType.USER_BC);
+		return new CUUserResponse(response.getResponseCode(), response.getResponse());
 	}
 }
