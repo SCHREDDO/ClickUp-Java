@@ -41,12 +41,14 @@ import io.github.schreddo.nerdy.clickup.api.requests.folders.DeleteFolderRequest
 import io.github.schreddo.nerdy.clickup.api.requests.folders.GetFolderRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.folders.GetFoldersRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.folders.UpdateFolderRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.lists.AddTaskToListRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.CreateFolderlessListRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.CreateListRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.DeleteListRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.GetFolderlessListsRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.GetListRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.GetListsRequest;
+import io.github.schreddo.nerdy.clickup.api.requests.lists.RemoveTaskFromList;
 import io.github.schreddo.nerdy.clickup.api.requests.lists.UpdateListRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.members.GetListMembersRequest;
 import io.github.schreddo.nerdy.clickup.api.requests.members.GetTaskMembersRequest;
@@ -208,6 +210,14 @@ public class ClickUp {
 	
 	public ClickUpResponse<CUList> getList(Long listID) {
 		return new GetListRequest(getAccessToken(), listID).execute();
+	}
+	
+	public CUEmptyResponse addTaskToList(String listID, String taskID) {
+		return new AddTaskToListRequest(getAccessToken(), listID, taskID).execute();
+	}
+	
+	public CUDeleteResponse removeTaskFromList(String listID, String taskID) {
+		return new RemoveTaskFromList(getAccessToken(), listID, taskID).execute();
 	}
 	
 	public CUTaskResponse createTask(Long listID, CUTask task) {
